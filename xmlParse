@@ -1,0 +1,28 @@
+import { ModuleList } from './ModuleList';
+
+export class App {
+  private modlists: ModuleList[];
+
+  constructor() {
+    this.modlists = [];
+    this.getModuleLists(this.parseXml(xml));
+  }
+  parseXml = (xmlStr: any): Document => {
+    return new DOMParser().parseFromString(xmlStr, "application/xml");
+  }
+
+  getModuleLists = (xml: Document) => {
+    let lists: NodeList = xml.querySelectorAll('module[type="SubMenu"]');
+    lists.forEach((modEl: Node) => {
+      console.log(modEl.childNodes);
+      new ModuleList(modEl.childNodes);
+     // console.log(modEl.childNodes);
+    });
+   
+  }
+ 
+  renderContent = () => {
+
+  }
+}
+new App();
